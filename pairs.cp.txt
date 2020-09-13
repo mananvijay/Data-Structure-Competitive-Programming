@@ -1,0 +1,48 @@
+//This is The Coding Area
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+	int n;
+  cin >> n;
+  int* arr = new int[n];
+  for(int i = 0; i < n; i++){
+  	cin >> arr[i];
+  }
+  int* bit = new int[n];
+  for(int i = 0; i < n; i++){
+    int x = arr[i], high = INT_MIN, small = INT_MAX;
+  		while(x != 0){
+          int mod = x%10;
+          high = mod > high ? mod : high;
+          small = mod < small ? mod : small;
+          x = x/10;
+        }
+    int sum = (high * 11) + (small * 7);
+    if(sum > 99){
+      bit[i] = sum - 100;
+    }else{
+    bit[i] = sum;
+    }
+  }
+  int count = 0;
+  for(int i = 0; i < n; i++){
+    	int y = bit[i]/10, tempCount = 0; 
+  		for(int j = i+1; j < n; i++){
+          if(tempCount == 2){
+          break;
+          }
+        	if(bit[j]/10 == y){
+              if((i+1)%2 == 0 && (j+1)%2 == 0){
+              		tempCount++;
+                	count++;
+              }else if((i+1)%2 == 1 && (j+1)%2 == 1){
+              		tempCount++;
+                	count++;
+              }
+            }
+        }
+  }
+  cout << count;
+}
